@@ -1,30 +1,16 @@
+version: '3.8'
 services:
-  php-app:
-    build: .
-    ports:
-      - "8080:80"
-    depends_on:
-      - mysql
-    volumes:
-      - .:/var/www/html
-    networks:
-      - app-network
-
-  mysql:
-    image: mysql:5.7
+  db:
+    image: postgres:13
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root_password
-      MYSQL_DATABASE: todo_db
+      POSTGRES_USER: todoapp_g77m_user
+      POSTGRES_PASSWORD: MJovArDsluu5fbHq1ww6SzLD2wADkCAq
+      POSTGRES_DB: todoapp_g77m
+    ports:
+      - "5432:5432"
     volumes:
-      - mysql_data:/var/lib/mysql
-    networks:
-      - app-network
-
-networks:
-  app-network:
-    driver: bridge
+      - postgres_data:/var/lib/postgresql/data
 
 volumes:
-  mysql_data:
-
+  postgres_data:
